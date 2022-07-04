@@ -1,5 +1,6 @@
 {
   "name": "tsconfig",
+  "description": "My local configurations for TypeScript",
   "version": "0.0.0",
   "private": true,
   "main": "index.js",

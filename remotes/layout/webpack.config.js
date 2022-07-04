@@ -16,6 +16,7 @@ const factory = (envFlags, argv) => {
 
   // in a real world app, you'd want to use an incremental counter
   const hash = isProduction ? '00x' : 'LOCAL';
+  // TODO: how can we determine the hostname and port? env vars? config?
   const publicPath = isProduction ? `/${hash}` : `http://localhost:${argv.port}/`;
 
   return {
@@ -51,7 +52,6 @@ const factory = (envFlags, argv) => {
         filename: 'assets.json',
         useCompilerPath: true,
         prettyPrint: true,
-        // removeFullPathAutoPrefix: true,
       }),
     ].filter(Boolean),
     resolve: {

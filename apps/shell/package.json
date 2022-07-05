@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "remote-loader": "*",
-    "single-spa": "^5.9.4"
+    "single-spa": "^5.9.4",
+    "template": "*"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0",

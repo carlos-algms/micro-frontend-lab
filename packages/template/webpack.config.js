@@ -19,7 +19,9 @@ const factory = (envFlags, argv) => {
     target: 'web',
     devtool: isProduction ? 'hidden-source-map' : 'source-map',
     entry: {
-      index: path.resolve(process.cwd(), 'src/index.ts'),
+      index: {
+        import: path.resolve(process.cwd(), 'src/index.ts'),
+      },
     },
     output: {
       filename: '[name].js',

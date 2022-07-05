@@ -6,9 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "npm run clear && webpack serve --port 3002 --mode development",
-    "watch": "npm run clear && webpack watch --mode development",
-    "clear": "rimraf public/",
-    "build": "npm run clear && webpack --mode production"
+    "watch": "npm run clear && tsc --watch",
+    "clear": "rimraf dist/",
+    "build": "npm run clear && tsc"
   },
   "main": "./dist/index.js",
   "sideEffects": false,

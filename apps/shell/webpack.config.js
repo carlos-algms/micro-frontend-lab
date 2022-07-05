@@ -17,6 +17,7 @@ const factory = (envFlags, argv) => {
   return {
     target: 'web',
     devtool: isProduction ? 'hidden-source-map' : 'source-map',
+    cache: false,
     entry: {
       index: path.resolve(process.cwd(), 'src/index.ts'),
     },

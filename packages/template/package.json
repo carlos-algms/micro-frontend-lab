@@ -1,22 +1,28 @@
 {
-  "name": "layout",
+  "name": "template",
   "version": "0.0.0",
-  "description": "layout components ",
+  "description": "generates the sidebar, header, all all the template structure",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "npm run clear && webpack serve --port 3001 --mode development",
+    "dev": "npm run clear && webpack serve --port 3002 --mode development",
+    "watch": "npm run clear && webpack watch --mode development",
     "clear": "rimraf public/",
     "build": "npm run clear && webpack --mode production"
   },
+  "main": "./dist/index.js",
+  "sideEffects": false,
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "single-spa-react": "^4.6.1"
+    "react-is": "^18.2.0",
+    "single-spa-react": "^4.6.1",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/styled-components": "^5.1.25",
     "assets-webpack-plugin": "^7.1.1",
     "html-webpack-plugin": "^5.5.0",
     "rimraf": "^3.0.2",

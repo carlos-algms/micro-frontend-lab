@@ -1,9 +1,15 @@
 {
   "extends": "tsconfig/base.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "public",
     "declaration": false,
-    "declarationMap": false
+    "declarationMap": false,
+    "target": "es2021",
+    "module": "ESNext",
+    "sourceMap": true,
+    "isolatedModules": false
   }
 }

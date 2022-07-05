@@ -1,4 +1,4 @@
-import { loadScript } from './loadScript';
+import { loadScript } from './loadScripts';
 
 declare type FederatedModuleContainer = {
   get: (component: string) => Promise<() => any>;
@@ -27,4 +27,30 @@ export const loadRemoteContainer = async (
   await container.init(__webpack_share_scopes__.default);
 
   return container;
+};
+
+const cache: Record<string, Promise<any> | undefined> = {};
+
+// TODO: how to get the URLs for the remote modules?
+const urls: Record<string, string> = {
+  layout: 'http://localhost:3001/remoteEntry.js',
+};
+
+export const loadRemoteModule = async (remoteName: string, moduleName: string) => {
+  if (cache[remoteName]) {
+    return cache[remoteName];
+  }
+
+  cache[remoteName] = (async () => {
+    try {
+      const container = await loadRemoteContainer(remoteName, urls[remoteName]);
+      const loadModule = await container.get(`./${moduleName}`);
+      return loadModule();
+    } catch (error) {
+      cache[remoteName] = undefined;
+      throw error;
+    }
+  })();
+
+  return cache[remoteName];
 };

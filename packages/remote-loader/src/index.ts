@@ -1,2 +1,2 @@
 export * from './loadRemoteContainer';
-export * from './loadScript';
+export * from './loadScripts';

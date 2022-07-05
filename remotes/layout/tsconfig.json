@@ -3,6 +3,7 @@
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "baseUrl": ".",
     "lib": ["DOM", "ESNext"],
     "outDir": "public",
     "declaration": false,

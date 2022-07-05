@@ -14,13 +14,17 @@ const factory = (envFlags, argv) => {
 
   return {
     target: 'web',
-    devtool: isProduction ? 'hidden-source-map' : 'eval',
+    devtool: isProduction ? 'hidden-source-map' : 'source-map',
     entry: {
       index: path.resolve(process.cwd(), 'src/index.ts'),
     },
     output: {
       filename: '[name].js',
       path: path.resolve(process.cwd(), 'dist'),
+      libraryTarget: 'umd',
+      clean: true,
+      library: 'remoteLoader',
+      umdNamedDefine: true,
     },
     plugins: [
       new ModuleFederationPlugin({
@@ -48,7 +52,7 @@ const factory = (envFlags, argv) => {
       ],
     },
     watchOptions: {
-      ignored: ['node_modules/**', 'public/**', 'dist/**'],
+      ignored: ['node_modules/**', 'public/**', 'dist/**', '.turbo/**'],
     },
   };
 };

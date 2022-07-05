@@ -8,5 +8,3 @@
  * in the application.tsx file.
  */
 import('./application');
-
-export {};

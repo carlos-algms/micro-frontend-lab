@@ -6,6 +6,8 @@ const AssetsPlugin = require('assets-webpack-plugin');
 
 const { ModuleFederationPlugin } = container;
 
+const deps = require('./package.json').dependencies;
+
 /**
  * @param {WebpackEnvFlags} envFlags
  * @param {Argv} argv
@@ -41,12 +43,15 @@ const factory = (envFlags, argv) => {
         },
       }),
       new ModuleFederationPlugin({
-        name: 'shell',
+        name: 'layout',
         filename: 'remoteEntry.js',
         exposes: {
-          './Header': './src/modules/Header',
+          './Header': './src/modules/Header/HeaderSpa',
         },
-        shared: {},
+        shared: {
+          react: { singleton: true, requiredVersion: deps.react },
+          'react-dom': { singleton: true, requiredVersion: deps['react-dom'] },
+        },
       }),
       new AssetsPlugin({
         filename: 'assets.json',

@@ -4,17 +4,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { container } = require('webpack');
 const { ModuleFederationPlugin } = container;
 
+const deps = require('./package.json').dependencies;
+
 /**
  * @param {WebpackEnvFlags} envFlags
  * @param {Argv} argv
  * @return {import('webpack').Configuration}
  */
 const factory = (envFlags, argv) => {
+  const isProduction = argv.mode === 'production';
+
   return {
     target: 'web',
-    devtool: 'source-map',
+    devtool: isProduction ? 'hidden-source-map' : 'source-map',
     entry: {
-      index: path.resolve(process.cwd(), '/src/index.ts'),
+      index: path.resolve(process.cwd(), 'src/index.ts'),
     },
     output: {
       filename: '[name].js',
@@ -24,7 +28,7 @@ const factory = (envFlags, argv) => {
       new HtmlWebpackPlugin({
         title: 'Shell',
         filename: 'index.html',
-        template: path.resolve(process.cwd(), '/src/index.html'),
+        template: path.resolve(process.cwd(), 'src/index.html'),
         chunks: ['index'],
         env: {
           ...process.env,
@@ -34,11 +38,14 @@ const factory = (envFlags, argv) => {
         name: 'shell',
         filename: 'remoteEntry.js',
         exposes: {},
-        shared: {},
+        shared: {
+          'single-spa': { singleton: true, requiredVersion: deps['single-spa'] },
+        },
       }),
     ].filter(Boolean),
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      symlinks: false,
     },
     module: {
       rules: [
@@ -47,9 +54,6 @@ const factory = (envFlags, argv) => {
           exclude: /(node_modules)/,
           use: {
             loader: 'ts-loader',
-            options: {
-              configFile: 'tsconfig.json',
-            },
           },
         },
       ],
@@ -73,7 +77,7 @@ module.exports = factory;
 /**
  * @typedef {{
  * color: boolean,
- * mode: 'production' | 'development',
+ * mode: 'production' | 'development' | 'none' | undefined,
  * analyze: boolean,
  * }} Argv
  */

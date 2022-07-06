@@ -5,6 +5,12 @@ The idea is to prove that is possible to load a remote module and render it usin
 
 The `apps/shell` folder is the **starting point**, it will load the first App start single-spa engine.
 
+<center>
+
+![](.github/app-running.png)
+
+</center>
+
 ### Apps, Packages, and Remotes
 
 - `apps/shell`: An orchestrator for loading remote packages and single-spa apps.
@@ -25,7 +31,7 @@ The local dev task will:
 
 1. wait for the build of all packages to complete
 1. run in parallel:
-   1. shell on port 3000
+   1. shell on port `3000`
    1. all remotes in different ports (defined on the `dev` task in their respective package.json)
 
 ```bash

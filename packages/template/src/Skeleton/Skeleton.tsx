@@ -11,7 +11,12 @@ export default function Skeleton() {
         </HeaderStyled>
         <MainWrapperStyled>
           <AsideStyled></AsideStyled>
-          <MainStyled></MainStyled>
+          <MainStyled>
+            <h1>Skeleton</h1>
+            <p>This is the empty blue header and the purple sidebar</p>
+            <p>It is coming from the template package</p>
+            <p>It is being lazy loaded via import()</p>
+          </MainStyled>
         </MainWrapperStyled>
       </WrapperStyled>
     </>

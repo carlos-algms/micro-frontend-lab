@@ -17,15 +17,13 @@ The `apps/shell` folder is the **starting point**, it will load the first App st
 - `packages/remote-loader`: A Standard npm package for loading federated modules as consumable values
 - `remotes/layout`: A remote module with layout components being exposed as single-spa applications
 
-### Build
-
-To build all apps and packages, run the following command:
+### Develop
 
 ```bash
-yarn run build
+yarn run dev
 ```
 
-### Develop
+Access it at: http://localhost:3000
 
 The local dev task will:
 
@@ -34,15 +32,27 @@ The local dev task will:
    1. shell on port `3000`
    1. all remotes in different ports (defined on the `dev` task in their respective package.json)
 
+The packages are built only once during the `dev` task.
+If you want to run `watch` on all of them, just run on the root level:
+
 ```bash
-yarn run dev
+yarn watch
 ```
 
+This will run `watch` on all packages and keep then running in parallel.  
 If you need to `watch` an specific package, you can do it by running:
 
 ```bash
 cd packages/[package-name]
 yarn run watch
+```
+
+### Production Build
+
+To build all apps, remotes, and packages, on the root level:
+
+```bash
+yarn run build
 ```
 
 ## References:
